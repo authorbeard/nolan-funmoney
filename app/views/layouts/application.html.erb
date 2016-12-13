@@ -8,8 +8,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <% if flash %>
+    <%= render 'layouts/messages' %>
+  <% end %>
+
   <body>
-    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-    <%= yield %>
+    <div class="container">
+      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,1 +1,25 @@
 <h1>User show page</h1>
+<h1 class="greeting">Hello, <%= @user.name || @user.email%></h1>
+
+<% if !@user.name %>
+  <%= link_to "Want to finish setting up your profile?", edit_user_path(@user) %></p>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-9 col-pull-sm-3 actionable">
+    <div class="user-todos">
+      <p>todos</p>
+    </div>
+
+    <div class="user-actions">
+      <p>actions</p>
+    </div>
+  </div>
+
+  <div class="col-xs-9 col-sm-3 user-accounts">
+    <p>user accounts</p>
+  </div>
+</div>
+
+
+

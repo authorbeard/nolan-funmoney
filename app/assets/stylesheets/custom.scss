@@ -1,0 +1,11 @@
+.user-accounts {
+  height: 100vh;
+
+}
+
+
+@media only screen and (min-width: 768px){
+  .user-accounts {
+    border-left: 1px solid black;
+  }
+}
