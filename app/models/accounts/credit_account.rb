@@ -1,0 +1,3 @@
+class CreditAccount < Account
+
+end
