@@ -1,0 +1,9 @@
+<p><%= current_user.name || current_user.email %></p>
+
+<% if !current_user.accounts %>
+  <%= link_to "Set up some accounts!", new_account_path(current_user) %>
+<% else %>
+  <% current_user.accounts.each do |acc| %>
+    <li><%= acc.type %>:<%= acc.name %></p>
+  <% end %>
+<% end %>
