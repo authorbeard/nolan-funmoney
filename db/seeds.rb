@@ -1,1 +1,0 @@
-User.create(email: 'deez@nuts.com', password: 'deez', password_confirmation: 'deez')

@@ -1,4 +1,0 @@
-class LoanAccount < Account
-
-
-end
