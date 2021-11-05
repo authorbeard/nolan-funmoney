@@ -7,8 +7,6 @@ class Account < ApplicationRecord
   has_many :credits, class_name: 'Transaction', foreign_key: :target_account_id
   has_many :debits, class_name: 'Transaction', foreign_key: :source_account_id
 
-  before_commit :update_balance
-
   def update_balance
     binding.pry    
   end
