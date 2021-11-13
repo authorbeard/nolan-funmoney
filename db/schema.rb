@@ -74,16 +74,12 @@ ActiveRecord::Schema.define(version: 2021_09_13_025308) do
     t.float "amount"
     t.boolean "internal"
     t.boolean "family", default: false
-    t.bigint "account_id"
     t.bigint "source_account_id"
     t.bigint "target_account_id"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["source_account_id"], name: "index_transactions_on_source_account_id"
     t.index ["target_account_id"], name: "index_transactions_on_target_account_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "user_accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
