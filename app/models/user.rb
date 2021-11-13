@@ -6,4 +6,7 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable
 
   has_one_attached :avatar
+
+  has_many :user_accounts
+  has_many :accounts, through: :user_accounts
 end

@@ -11,9 +11,6 @@ class CreateAccounts < ActiveRecord::Migration[6.1]
       t.boolean :intro_rate, default: false
       t.datetime :intro_rate_end
       t.references :bank
-      t.references :user
-      t.references :source_account, foreign_key: { to_table: :accounts }
-      t.references :target_account, foreign_key: { to_table: :accounts }
       t.timestamps
     end
   end
