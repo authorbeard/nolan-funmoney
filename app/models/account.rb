@@ -8,7 +8,9 @@ class Account < ApplicationRecord
   has_many :users, through: :user_accounts
   has_many :transactions
   has_many :credit_transactions, class_name: 'Transaction', foreign_key: :target_account_id
-  has_many :debit_transactionss, class_name: 'Transaction', foreign_key: :source_account_id
+  has_many :debit_transactions, class_name: 'Transaction', foreign_key: :source_account_id
+
+  after_touch :update_balance
 
   def update_balance
     update!(balance: credits - debits)
@@ -19,7 +21,7 @@ class Account < ApplicationRecord
   end
 
   def debits
-    @debits ||= credit_transactions.sum(:amount) * -1 
+    @debits ||= debit_transactions.sum(:amount)
   end
 
 end
