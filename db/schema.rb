@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_25_022128) do
+ActiveRecord::Schema.define(version: 2021_09_13_025308) do
+
+  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "account_number"
+    t.string "account_type", default: "bank"
+    t.float "balance"
+    t.float "interest_rate"
+    t.datetime "due_date"
+    t.string "status", default: "active", null: false
+    t.boolean "intro_rate", default: false
+    t.datetime "intro_rate_end"
+    t.bigint "bank_id"
+    t.bigint "user_id"
+    t.bigint "source_account_id"
+    t.bigint "target_account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bank_id"], name: "index_accounts_on_bank_id"
+    t.index ["source_account_id"], name: "index_accounts_on_source_account_id"
+    t.index ["target_account_id"], name: "index_accounts_on_target_account_id"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +62,31 @@ ActiveRecord::Schema.define(version: 2021_07_25_022128) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "banks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "routing_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transactions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "description"
+    t.float "amount"
+    t.boolean "internal"
+    t.boolean "family", default: false
+    t.bigint "source_account_id"
+    t.bigint "target_account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["source_account_id"], name: "index_transactions_on_source_account_id"
+    t.index ["target_account_id"], name: "index_transactions_on_target_account_id"
+  end
+
+  create_table "user_accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -67,6 +114,10 @@ ActiveRecord::Schema.define(version: 2021_07_25_022128) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "accounts", "accounts", column: "source_account_id"
+  add_foreign_key "accounts", "accounts", column: "target_account_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "transactions", "accounts", column: "source_account_id"
+  add_foreign_key "transactions", "accounts", column: "target_account_id"
 end
