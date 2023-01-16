@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'blueprinter'
 gem 'devise'
 gem 'image'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 gem 'ruby-vips'
 
 group :development, :test do
